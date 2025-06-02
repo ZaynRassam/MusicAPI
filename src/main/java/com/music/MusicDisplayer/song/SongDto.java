@@ -3,8 +3,6 @@ package com.music.MusicDisplayer.song;
 public class SongDto {
     private String songId;
     private String songName;
-    private String albumId;
-    private String artistId;
     private Integer duration;
     private Integer trackNumber;
 
@@ -33,22 +31,6 @@ public class SongDto {
 
     public void setSongId(String songId) {
         this.songId = songId;
-    }
-
-    public String getAlbumId() {
-        return albumId;
-    }
-
-    public void setAlbumId(String albumId) {
-        this.albumId = albumId;
-    }
-
-    public String getArtistId() {
-        return artistId;
-    }
-
-    public void setArtistId(String artistId) {
-        this.artistId = artistId;
     }
 
     public Integer getTrackNumber() {

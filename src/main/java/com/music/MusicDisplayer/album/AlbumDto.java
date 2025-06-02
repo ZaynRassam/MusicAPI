@@ -1,32 +1,40 @@
 package com.music.MusicDisplayer.album;
 
+import com.music.MusicDisplayer.artist.ArtistDto;
+import com.music.MusicDisplayer.song.Song;
+import com.music.MusicDisplayer.song.SongDto;
+
+import java.util.List;
+
 public class AlbumDto {
-    public String albumId;
-    public String albumName;
-    public String albumUrl;
-    public String releaseYear;
-    public String description;
+    private String albumId;
+    private String albumName;
+    private String albumUrl;
+    private String releaseYear;
+    private String description;
+
+    private List<SongDto> songs;
 
     public AlbumDto() {
     }
 
     public String getAlbumId() {
-        return albumId;
+        return this.albumId;
     }
 
     public String getAlbumName() {
-        return albumName;
+        return this.albumName;
     }
 
     public String getAlbumUrl() {
-        return albumUrl;
+        return this.albumUrl;
     }
 
     public String getReleaseYear() {
-        return releaseYear;
+        return this.releaseYear;
     }
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setAlbumId(String albumId) {
@@ -47,5 +55,13 @@ public class AlbumDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<SongDto> getSongs() {
+        return this.songs;
+    }
+
+    public void setSongs(List<SongDto> songs) {
+        this.songs = songs;
     }
 }

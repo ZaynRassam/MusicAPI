@@ -21,16 +21,12 @@ public class SongController {
     @GetMapping("/all")
     @CrossOrigin(origins = "http://localhost:5173")
     public List<SongDto> getAllSongs() {
-        return songService.getAllSongs().stream().map(song -> {
-            return songMapper.toDto(song);
-        }).toList();
+        return songService.getAllSongs().stream().map(songMapper::toDto).toList();
     }
 
-    @GetMapping("/album/{albumId}")
+    @GetMapping("/{songId}")
     @CrossOrigin(origins = "http://localhost:5173")
-    public List<SongDto> getSongsByAlbumId(@PathVariable String albumId) {
-        return songService.getSongsByAlbumId(albumId).stream().map(song -> {
-            return SongMapper.toDto(song);
-        }).toList();
+    public SongDto getSongById(@PathVariable String songId) {
+        return songMapper.toDto(songService.getSongById(songId));
     }
 }

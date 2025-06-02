@@ -1,9 +1,14 @@
 package com.music.MusicDisplayer.artist;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.music.MusicDisplayer.album.Album;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Table(name = "rock_artists")
+@Table(name = "rock_artists_1")
 public class Artist {
     @Id
     private String artistId;
@@ -11,6 +16,10 @@ public class Artist {
     private String artistUrl;
     @Column(columnDefinition = "TEXT")
     private String bio;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "artist_id")
+    private List<Album> albums;
 
     public Artist() {
     }
@@ -45,5 +54,13 @@ public class Artist {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public List<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(List<Album> albums) {
+        this.albums = albums;
     }
 }

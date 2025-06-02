@@ -1,45 +1,38 @@
 package com.music.MusicDisplayer.album;
 
-import com.music.MusicDisplayer.artist.Artist;
-import com.music.MusicDisplayer.song.Song;
 import com.music.MusicDisplayer.song.SongDto;
-import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity
-@Table(name = "rock_albums_1")
-public class Album {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+public class AlbumDetailDto {
     private String albumId;
     private String albumName;
     private String albumUrl;
     private String releaseYear;
-    @Column(columnDefinition = "TEXT")
     private String description;
+    private String artistName;
+    private List<SongDto> songs;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "album_id")
-    private List<Song> songs;
-
-    public Album() {
+    public AlbumDetailDto() {
     }
 
     public String getAlbumId() {
-        return albumId;
+        return this.albumId;
     }
+
     public String getAlbumName() {
-        return albumName;
+        return this.albumName;
     }
+
     public String getAlbumUrl() {
-        return albumUrl;
+        return this.albumUrl;
     }
+
     public String getReleaseYear() {
-        return releaseYear;
+        return this.releaseYear;
     }
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setAlbumId(String albumId) {
@@ -62,12 +55,19 @@ public class Album {
         this.description = description;
     }
 
-    public List<Song> getSongs() {
-        return songs;
+    public String getArtistName() {
+        return artistName;
     }
 
-    public void setSongs(List<Song> songs) {
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
+    }
+
+    public List<SongDto> getSongs() {
+        return this.songs;
+    }
+
+    public void setSongs(List<SongDto> songs) {
         this.songs = songs;
     }
-
 }

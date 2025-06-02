@@ -23,12 +23,4 @@ public class SongService {
     public Song getSongById(String songId) {
         return songRepository.findById(songId).orElse(null);
     }
-
-    public List<Song> getSongsByArtistId(String artistId) {
-        return songRepository.getSongsByArtistId(artistId);
-    }
-
-    public List<Song> getSongsByAlbumId(String albumId){
-        return songRepository.getSongsByAlbumId(albumId);
-    }
 }
