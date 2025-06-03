@@ -21,25 +21,21 @@ public class AlbumController {
     }
 
     @GetMapping("/all")
-    @CrossOrigin(origins = "http://localhost:5173")
     public List<AlbumDto> getAllAlbums() {
         return albumService.getAllAlbums().stream().map(albumMapper::toDto).toList();
     }
 
     @GetMapping("/{albumId}")
-    @CrossOrigin(origins = "http://localhost:5173")
     public AlbumDto getAlbumByAlbumId(@PathVariable String albumId) {
         return albumMapper.toDto(albumService.getAlbumByAlbumId(albumId));
     }
 
     @GetMapping("/{albumId}/songs")
-    @CrossOrigin(origins = "http://localhost:5173")
     public List<SongDto> getSongsByAlbumId(@PathVariable String albumId){
         return albumMapper.toDto(albumService.getAlbumByAlbumId(albumId)).getSongs();
     }
 
     @GetMapping("/{albumId}/details")
-    @CrossOrigin(origins = "http://localhost:5173")
     public AlbumDetailDto getAlbumDetails(@PathVariable String albumId) throws Exception {
         Album album = albumService.getAlbumByAlbumId(albumId);
         Artist artist = albumService.getArtistByAlbumId(album);

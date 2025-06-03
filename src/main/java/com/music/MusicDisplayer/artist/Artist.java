@@ -11,6 +11,7 @@ import java.util.List;
 @Table(name = "rock_artists_1")
 public class Artist {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String artistId;
     private String artistName;
     private String artistUrl;

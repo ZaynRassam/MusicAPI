@@ -17,26 +17,34 @@ public class ArtistController {
     }
 
     @GetMapping("/all")
-    @CrossOrigin(origins = "http://localhost:5173")
     public List<ArtistDto> getAllArtists() {
         return artistService.getAllArtists().stream().map(artistMapper::toDto).toList();
     }
 
     @GetMapping("/{artistId}")
-    @CrossOrigin(origins = "http://localhost:5173")
     public ArtistDto getArtistById(@PathVariable String artistId) {
         return artistMapper.toDto(artistService.getArtistById(artistId));
     }
 
     @GetMapping("/name/{artistName}")
-    @CrossOrigin(origins = "http://localhost:5173")
     public Artist getArtistByArtistName(@PathVariable String artistName) {
         return artistService.getArtistByArtistName(artistName);
     }
 
     @GetMapping("/{artistId}/albums")
-    @CrossOrigin(origins = "http://localhost:5173")
     public List<AlbumDto> getAllAlbumsByArtistId(@PathVariable String artistId){
         return artistMapper.toDto(artistService.getArtistById(artistId)).getAlbums();
+    }
+
+    @PostMapping("/add")
+    public void addArtist(@RequestBody ArtistDto artistDto) {
+        System.out.println("Adding artist: " + artistDto.getArtistName());
+        artistService.add(artistMapper.toEntity(artistDto));
+    }
+
+    @DeleteMapping("/delete/{artistId}")
+    public void deleteArtistById(@PathVariable String artistId){
+        System.out.println("Deleting artist: " + artistId);
+        artistService.delete(artistId);
     }
 }

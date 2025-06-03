@@ -54,7 +54,6 @@ public class AlbumMapper {
         return albumDetailDto;
     }
 
-    // You need to pass in the Artist from the service layer
     public Album toEntity(AlbumDetailDto albumDetailDto) {
         Album album = new Album();
         album.setAlbumId(albumDetailDto.getAlbumId());

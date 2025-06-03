@@ -19,13 +19,11 @@ public class SongController {
     }
 
     @GetMapping("/all")
-    @CrossOrigin(origins = "http://localhost:5173")
     public List<SongDto> getAllSongs() {
         return songService.getAllSongs().stream().map(songMapper::toDto).toList();
     }
 
     @GetMapping("/{songId}")
-    @CrossOrigin(origins = "http://localhost:5173")
     public SongDto getSongById(@PathVariable String songId) {
         return songMapper.toDto(songService.getSongById(songId));
     }

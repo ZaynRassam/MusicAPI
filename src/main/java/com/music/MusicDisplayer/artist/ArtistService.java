@@ -1,6 +1,7 @@
 package com.music.MusicDisplayer.artist;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,5 +25,20 @@ public class ArtistService {
 
     public Artist getArtistByArtistName(String artistName) {
         return artistRepository.getArtistByArtistName(artistName);
+    }
+
+    public void add(Artist artist) {
+        artistRepository.save(artist);
+    }
+
+    public ResponseEntity<Void> delete(String artistId){
+        if (artistRepository.findById(artistId).isEmpty()) {
+            System.out.println("Artist not found");
+            return ResponseEntity.noContent().build();
+        } else {
+            System.out.println("Deleting artist: " + artistId);
+            artistRepository.deleteById(artistId);
+            return ResponseEntity.ok().build();
+        }
     }
 }

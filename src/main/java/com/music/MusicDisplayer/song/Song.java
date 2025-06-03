@@ -10,6 +10,7 @@ import java.util.List;
 @Table(name = "rock_songs_1")
 public class Song {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String songId;
     private String songName;
     private Integer duration;
