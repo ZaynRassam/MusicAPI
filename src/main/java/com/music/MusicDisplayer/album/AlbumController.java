@@ -39,6 +39,7 @@ public class AlbumController {
     }
 
     @GetMapping("/{albumId}/details")
+    @CrossOrigin(origins = "http://localhost:5173")
     public AlbumDetailDto getAlbumDetails(@PathVariable String albumId) throws Exception {
         Album album = albumService.getAlbumByAlbumId(albumId);
         Artist artist = albumService.getArtistByAlbumId(album);
