@@ -47,4 +47,10 @@ public class ArtistController {
         System.out.println("Deleting artist: " + artistId);
         artistService.delete(artistId);
     }
+
+    @PutMapping("/update/{artistId}")
+    public void updateArtist(@RequestBody ArtistDto artistDto, @PathVariable String artistId) {
+        System.out.println("Updating artist: " + artistDto.getArtistName());
+        artistService.update(artistDto, artistId);
+    }
 }
