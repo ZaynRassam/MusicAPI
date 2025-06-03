@@ -3,6 +3,7 @@ package com.music.MusicDisplayer.artist;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.music.MusicDisplayer.album.Album;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String artistId;
+    @NotBlank(message = "Artist name is mandatory")
     private String artistName;
     private String artistUrl;
     @Column(columnDefinition = "TEXT")

@@ -4,6 +4,7 @@ import com.music.MusicDisplayer.artist.Artist;
 import com.music.MusicDisplayer.song.Song;
 import com.music.MusicDisplayer.song.SongDto;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String albumId;
+    @NotBlank(message = "Album name is mandatory")
     private String albumName;
     private String albumUrl;
     private String releaseYear;
