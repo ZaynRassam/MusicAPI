@@ -1,6 +1,10 @@
 package com.music.MusicDisplayer.artist;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.music.MusicDisplayer.album.AlbumDto;
+import com.music.MusicDisplayer.openai.OpenAi;
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,9 +15,13 @@ public class ArtistController {
 
     private final ArtistService artistService;
     private final ArtistMapper artistMapper;
-    public ArtistController(ArtistService artistService, ArtistMapper artistMapper) {
+    private final OpenAi openai;
+    private final ChatClient chatClient;
+    public ArtistController(ArtistService artistService, ArtistMapper artistMapper, OpenAi openai, ChatClient.Builder chatClientBuilder) {
         this.artistService = artistService;
         this.artistMapper = artistMapper;
+        this.openai = openai;
+        this.chatClient = chatClientBuilder.build();
     }
 
     @GetMapping("/all")
@@ -52,5 +60,17 @@ public class ArtistController {
     public void updateArtist(@RequestBody ArtistDto artistDto, @PathVariable String artistId) {
         System.out.println("Updating artist: " + artistDto.getArtistName());
         artistService.update(artistDto, artistId);
+    }
+
+    @GetMapping("/ai-complete/{artistId}")
+    public void getAiArtistUpdate(@PathVariable String artistId) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        ArtistDto artistDto = artistMapper.toDto(artistService.getArtistById(artistId));
+        String json = mapper.writeValueAsString(artistDto);
+        String response = openai.createArtistUsingAi(json, chatClient);
+        System.out.println(response);
+
+        ArtistDto updatedArtistDto = mapper.readValue(response, ArtistDto.class);
+        artistService.update(updatedArtistDto, artistId);
     }
 }
