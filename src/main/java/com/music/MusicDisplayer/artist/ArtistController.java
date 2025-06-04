@@ -68,7 +68,7 @@ public class ArtistController {
         ArtistDto artistDto = artistMapper.toDto(artistService.getArtistById(artistId));
         String json = mapper.writeValueAsString(artistDto);
         String response = openai.createArtistUsingAi(json, chatClient);
-        System.out.println(response);
+//        System.out.println(response);
 
         ArtistDto updatedArtistDto = mapper.readValue(response, ArtistDto.class);
         artistService.update(updatedArtistDto, artistId);
